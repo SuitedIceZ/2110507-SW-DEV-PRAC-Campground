@@ -1,6 +1,8 @@
 'use client'
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useRouter } from 'next/navigation'
+import React, { createContext, useContext, useState, useEffect , ReactNode } from 'react';
 import {IAuthContext} from './types'
+import { Router } from 'next/router';
 
 type User = {
   id: string;
@@ -8,10 +10,6 @@ type User = {
   email: string;
   tel: string;
   role: string;
-};
-
-const removeToken = (): void => {
-    localStorage.removeItem('token');   
 };
   
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -23,10 +21,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [role, setRole] = useState("");
   const [token, setToken] = useState(localStorage.getItem('token') || "");
 
+  const router = useRouter();
+
   useEffect(() => {
     //const token = localStorage.getItem('token');
     setToken(localStorage.getItem('token') || "");
-
+    console.log("use effect set Token : ",localStorage.getItem('token'))
     const validateToken = async () => {
         console.log("validating Token")
       try {
@@ -49,16 +49,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log(err);
       }
     }
-
-    if(token)
+    const currentPath = window.location.pathname;
+    if(token){
       validateToken();
+    }
+    else if(currentPath !== '/register' && currentPath !== '/login'){
+      router.push('/register')
+    }
+
   }, [])
 
   const logout = () => {
     setName("");
     setRole("");
     setToken("");
-    removeToken();
+    localStorage.removeItem('token');   
+    router.push('/register')
   };
 
   return (

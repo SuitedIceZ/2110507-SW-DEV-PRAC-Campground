@@ -1,11 +1,11 @@
-import { useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useAuth } from "@/contexts/authContext";
 
 const useLoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  //const { setName, setRole } = useAuth();
+  const { setName, setToken, setRole } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,8 +35,9 @@ const useLoginForm = () => {
 
       } else {
         localStorage.setItem('token', data.token)
-       // setName(data.name)
-       // setRole(data.role)
+       setName(data.name)
+       setToken(data.token)
+       //setRole(data.data.role)
         router.push('/campgrounds')
       }
     } catch (error) {

@@ -5,9 +5,12 @@ import Button from '@mui/material/Button';
 import globalStyles from "../app/Global.module.css"
 import { revalidatePath } from "next/cache";
 import { useRouter } from 'next/navigation'
+import { useAuth } from "@/contexts/authContext";
 
 export default function CreateCampgroundForm() {
     const router = useRouter();
+    // const { name, token } = useAuth();
+
     const addCampground = async (event: FormEvent) => {
         event.preventDefault(); // Prevent the default form submission behavior
 
@@ -32,12 +35,13 @@ export default function CreateCampgroundForm() {
             postalcode: postalcode,
             tel: tel,
             picture: picture
-            // ... (repeat for other form fields)
         };
 
-        console.log(req);
-        //TODO : auth token
-        const token = ""
+        // console.log("req : " , req);
+        // console.log("name : ", name);
+        // console.log("token : ", token);
+        // console.log("local token : ", localStorage.getItem('token'));
+        const token = localStorage.getItem('token')
         const res = await fetch(process.env.NEXT_PUBLIC_GATEWAY_URL + '/api/v1/campgrounds', {
             method: 'POST',
             headers: {

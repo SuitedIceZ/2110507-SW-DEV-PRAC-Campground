@@ -1,13 +1,13 @@
-"use client"
+'use client'
 import NavigationBarItem from './NavigationBarItem';
 import Button from '@mui/material/Button';
 import styles from './NavigationBar.module.css'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import globalStyles from '../app/Global.module.css'
-
 import { useAuth } from "@/contexts/authContext";
-export default async function NavigationBar() {
+
+export default function NavigationBar() {
     // TODO : add authorization
     const { name, role, logout } = useAuth()
 
