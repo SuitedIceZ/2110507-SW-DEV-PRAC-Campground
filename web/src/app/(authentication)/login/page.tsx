@@ -3,7 +3,7 @@ import styles from "./page.module.css"
 import globalStyles from "../../Global.module.css"
 import { Button } from "@mui/material";
 import useLoginForm from "./useLoginForm";
-import TextField from "../../../components/TextField";
+import TextField from "@/components/TextField";
 
 export default function LoginPage() {
   const {

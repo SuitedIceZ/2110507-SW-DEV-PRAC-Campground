@@ -1,15 +1,11 @@
 import Image from 'next/image'
+import styles from './(authentication)/AuthenticationLayout.module.css';
 
 export default function Home() {
   return (
     <main>
-      <div>
-        <p>Home</p>
-        <div>
-          <p>you shouldn't be here</p>
-          <form></form>
+        <div className={styles.layoutBackground}>
         </div>
-      </div>
     </main>
   )
 }

@@ -2,9 +2,11 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useAuth } from "@/contexts/authContext";
 
-const useLoginForm = () => {
+const useRegisterForm = () => {
+  const [name, setFormName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [tel, setTel] = useState('')
   const { setName, setToken, setRole } = useAuth();
   const router = useRouter();
 
@@ -18,10 +20,13 @@ const useLoginForm = () => {
     }
     try {
       const req = {
+        name: name,
         email: email,
         password: password,
+        tel: tel,
+        role: "user"
       }
-      const res = await fetch(process.env["NEXT_PUBLIC_GATEWAY_URL"] + '/api/v1/auth/login', {
+      const res = await fetch(process.env["NEXT_PUBLIC_GATEWAY_URL"] + '/api/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,12 +41,16 @@ const useLoginForm = () => {
         localStorage.setItem('token', data.token)
        setName(data.name)
        setToken(data.token)
-       //setRole(data.data.role)
+       setRole("user")
         router.push('/campgrounds')
       }
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormName(event.target.value)
   }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,14 +61,22 @@ const useLoginForm = () => {
     setPassword(event.target.value)
   }
 
+  const handleTelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTel(event.target.value)
+  }
+
   return {
+    name,
     email,
     password,
-    handleSubmit,
+    tel,
+    handleNameChange,
     handleEmailChange,
     handlePasswordChange,
+    handleTelChange,
+    handleSubmit,
   }
 
 }
 
-export default useLoginForm
+export default useRegisterForm
