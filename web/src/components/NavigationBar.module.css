@@ -1,10 +1,10 @@
 
 .NavigationBar {
     display: flex;
-    width: 100vw;
-    padding: 0px 110px;
+    width: auto;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 24px;
 }
 
 .NavigationBarSub {
