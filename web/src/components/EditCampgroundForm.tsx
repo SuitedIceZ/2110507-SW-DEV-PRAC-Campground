@@ -59,8 +59,7 @@ export default function CreateCampgroundForm({cid}:{cid:string}) {
         };
 
         console.log(req);
-        //TODO : auth token
-        const token = ""
+        const token = localStorage.getItem('token')
         const res = await fetch(process.env.NEXT_PUBLIC_GATEWAY_URL + '/api/v1/campgrounds/' + cid, {
             method: 'PUT',
             headers: {

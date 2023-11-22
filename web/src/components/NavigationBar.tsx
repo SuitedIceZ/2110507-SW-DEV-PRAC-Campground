@@ -1,12 +1,16 @@
+'use client'
 import NavigationBarItem from './NavigationBarItem';
 import Button from '@mui/material/Button';
 import styles from './NavigationBar.module.css'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import globalStyles from '../app/Global.module.css'
-export default async function NavigationBar() {
+import { useAuth } from "@/contexts/authContext";
+
+export default function NavigationBar() {
     // TODO : add authorization
-    
+    const { name, role, logout } = useAuth()
+
     return (
         <div className={styles.NavigationBar}>
             <div className={styles.NavigationBarSub}>
@@ -17,9 +21,9 @@ export default async function NavigationBar() {
              <div className={styles.NavigationBarSub}>
                 <div className={globalStyles.RowContainer}>   
                     <PermIdentityIcon/>
-                    <p>Username</p>
+                    <p>{name} {role=='admin'?" (Admin)" : ""}</p>
                 </div>
-                <Button variant="outlined" color='inherit'>
+                <Button variant="outlined" color='inherit' onClick={logout}>
                     <div className={styles.SmallRowContainer}> 
                         <p>Logout</p> 
                         <LogoutIcon/>
