@@ -56,6 +56,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     else if(currentPath !== '/register' && currentPath !== '/login'){
       router.push('/register')
     }
+    // if(role == 'user'){
+    //   if(currentPath != '/campgrounds' && currentPath !== '/bookings'){
+    //     router.push('/campgrounds')    
+    //   }
+    // }
 
   }, [])
 

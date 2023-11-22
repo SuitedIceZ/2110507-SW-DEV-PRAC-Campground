@@ -15,7 +15,16 @@ export default function NavigationBar() {
         <div className={styles.NavigationBar}>
             <div className={styles.NavigationBarSub}>
                 <NavigationBarItem title='Campground' pageRef='/campgrounds'/>
-                <NavigationBarItem title='Booking' pageRef='/bookings'/>
+                {
+                    role == 'admin' ? 
+                    <>
+                    <NavigationBarItem title='My Booking' pageRef='/bookings'/>
+                    <NavigationBarItem title='All Booking' pageRef='/bookings/all'/>
+                    </> 
+                    : 
+                    <NavigationBarItem title='Booking' pageRef='/bookings'/>
+                }
+                {/* <NavigationBarItem title='Booking' pageRef='/bookings'/> */}
             </div>
 
              <div className={styles.NavigationBarSub}>
