@@ -84,14 +84,16 @@ const AdminCampgroundList: React.FC = () => {
 
     const CampgroundItem: React.FC<{ campground: Campground }> = ({ campground }) => {
         return (
-            <div style={{gap: '20px'}} >
+            <div style={{gap: '20px', width: '70vw'}} >
                 <div style={{display: 'flex',flexDirection:'row',justifyContent:'space-between', margin: '20px 0px'}}>
-                    <div style={{display: 'flex',flexDirection:'column', gap: '8px'}} >
+                    <div style={{display: 'flex',flexDirection:'column', gap: '12px', marginLeft: '20px'}} >
                         <h5>{campground.name}</h5>
-                        <p style={{color: '#B9C2D9'}}>Address: {campground.address}</p>
-                        <p style={{color: '#B9C2D9'}}>District: {campground.district} | Province: {campground.province} | Postal Code: {campground.postalcode}</p>
-                        <p style={{color: '#B9C2D9'}}>Tel: {campground.tel}</p>
-                        <div style={{display: 'flex',flexDirection:'row',justifyContent:'space-between', gap: '20px'}}>
+                        <div>
+                            <p style={{color: '#B9C2D9'}}>Address: {campground.address}</p>
+                            <p style={{color: '#B9C2D9'}}>District: {campground.district} | Province: {campground.province} | Postal Code: {campground.postalcode}</p>
+                            <p style={{color: '#B9C2D9'}}>Tel: {campground.tel}</p>
+                        </div>
+                        <div style={{display: 'flex',flexDirection:'row',justifyContent:'space-between', gap: '20px', width:'400px'}}>
                             <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
                                 onClick={(event:FormEvent)=>{
                                     event.preventDefault();
