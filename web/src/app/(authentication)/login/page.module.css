@@ -1,0 +1,54 @@
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 147px;
+    padding-right: 301px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.header1Title {
+    color: #FFF;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    font-family: Prompt;
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.header2Title {
+    color: #FFF;
+    font-family: Prompt;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}   
+
+.header3Title {
+    color: #FFF;
+    text-align: center;
+    font-family: Prompt;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 75% */
+    letter-spacing: 0.18px;
+}
+
+.FormContainer{
+    width: 25vw;
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
