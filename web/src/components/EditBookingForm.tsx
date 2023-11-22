@@ -158,7 +158,7 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
                 <Image 
                     className={globalStyles.ImageBorder}
                     src={campPictureURL}
-                    width={1000} height={500} alt={campPictureURL} >
+                    width={800} height={500} alt={campPictureURL} >
                 </Image>
             </div>
         </div>

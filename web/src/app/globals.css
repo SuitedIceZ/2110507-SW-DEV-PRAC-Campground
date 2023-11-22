@@ -112,3 +112,15 @@ a {
     color-scheme: dark;
   }
 }
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}

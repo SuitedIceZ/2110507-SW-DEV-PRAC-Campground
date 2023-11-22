@@ -81,7 +81,7 @@ export default function CreateBookingForm({cid}:{cid:string}) {
     }
     return(
         <div>
-            <p>Create Booking</p>
+            <h5>Create Booking</h5>
             <div className={globalStyles.CampBookingContainer}>
                 <form className={globalStyles.FormContainer} onSubmit={CreateBooking}> 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -121,14 +121,14 @@ export default function CreateBookingForm({cid}:{cid:string}) {
                         </LocalizationProvider>
 
                     <Button type="submit" variant="outlined" color='inherit' >
-                    <p>Save</p> 
+                    <p>Booking</p> 
                     </Button> 
                 </form>
 
                 <Image 
                     className={globalStyles.ImageBorder}
                     src={campPictureURL}
-                    width={1000} height={500} alt={campPictureURL} >
+                    width={800} height={500} alt={campPictureURL} >
                 </Image>
             </div>
         </div>

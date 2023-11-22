@@ -106,7 +106,7 @@ export default function EditCampgroundForm({cid}:{cid:string}) {
 
     return(
         <div>
-            <p>Edit Campground</p>
+            <h3>Edit Campground</h3>
             <form className={globalStyles.FormContainer} onSubmit={editCampground}> 
                 <TextField  label="Name"  autoComplete='off' name='name' id='name' value={name} onChange={handleNameChange}/>
                 <TextField  label="Address"  autoComplete='off' name='address' id="address" value={address} onChange={handleAddressChange}/>

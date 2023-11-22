@@ -8,6 +8,7 @@
     min-height: 100vh; /* Ensures it covers the full viewport height */
     width: 100vw; /* Ensures it covers the full width */
     padding: 0px 110px;
+    background-attachment: fixed;
 }
 
 .contentWrapper {
