@@ -37,10 +37,6 @@ export default function CreateCampgroundForm() {
             picture: picture
         };
 
-        // console.log("req : " , req);
-        // console.log("name : ", name);
-        // console.log("token : ", token);
-        // console.log("local token : ", localStorage.getItem('token'));
         const token = localStorage.getItem('token')
         const res = await fetch(process.env.NEXT_PUBLIC_GATEWAY_URL + '/api/v1/campgrounds', {
             method: 'POST',
@@ -59,7 +55,7 @@ export default function CreateCampgroundForm() {
             router.push('/campgrounds');
         }
         } catch (error) {
-        console.log(error);
+            console.log(error);
         }
     }
     return(

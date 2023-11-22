@@ -14,3 +14,17 @@
     align-items: flex-start;
     gap: 20px;
 }
+
+.CampBookingContainer{
+    display: flex;
+    padding: 16px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 120px;
+}
+
+.ImageBorder{
+    border-style: solid;
+    border-color: white;
+    border: 1px solid rgba(var(--card-border-rgb), 0);
+}

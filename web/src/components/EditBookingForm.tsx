@@ -8,13 +8,16 @@ import dayjs from "dayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
+import Image from "next/image"
 import { useRouter } from 'next/navigation'
 
-export default function EditBookingForm({bid}:{bid:string}) {
+export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
     const router = useRouter();
 
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     const [checkoutDate, setCheckoutDate] = useState<Dayjs|null>(null)  
+
+    const [campPictureURL, setCampPictureURL] = useState('') 
 
     useEffect(() => {
         const fetchBookingData = async () => {
@@ -31,10 +34,7 @@ export default function EditBookingForm({bid}:{bid:string}) {
                 })
                 const data = await res.json();
                 if(data.success) {
-                    console.log("data : ", data);
-                    // setBookingDate(dayjs("2023-10-31T17:00:00.000Z"))
-                    // setCheckoutDate(dayjs("2023-11-01T17:00:00.000Z"))
-                    // window.alert("data : " + data.data.bookingDate)
+                    console.log("book data : ", data);
                     setBookingDate(dayjs(data.data.bookingDate))
                     setCheckoutDate(dayjs(data.data.checkoutDate))
                 }
@@ -45,16 +45,40 @@ export default function EditBookingForm({bid}:{bid:string}) {
         }
         fetchBookingData();
     }, [])  
-    const editBooking = async (event: FormEvent) => {
-        event.preventDefault(); // Prevent the default form submission behavior
 
+
+    const fetchCampgroundData = async () => {
+        try {
+            //TODO : auth token
+            const token = localStorage.getItem('token')
+            console.log("token : ", token);
+            const res = await fetch(process.env['NEXT_PUBLIC_GATEWAY_URL'] + '/api/v1/campgrounds/' + cid, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            const data = await res.json();
+            if(data.success) {
+                console.log("camp data : ", data);
+                setCampPictureURL(data.data.picture)
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    fetchCampgroundData();
+
+
+    const editBooking = async (event: FormEvent) => {
+        event.preventDefault(); 
         try {
         const req = {
             bookingDate: bookingDate,
             checkoutDate: checkoutDate,
-            // ... (repeat for other form fields)
         };
-
         console.log(req);
         //TODO : auth token
         const token = localStorage.getItem('token')
@@ -88,46 +112,55 @@ export default function EditBookingForm({bid}:{bid:string}) {
     return(
         <div>
             <p>Edit Booking</p>
-            <form className={globalStyles.FormContainer} onSubmit={editBooking}> 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker 
-                    label="BookingDate"
-                    value={bookingDate}
-                    onChange={(value)=>{handleBookingDateChange(value!)}}
-                    slotProps={{
-                        textField: {
-                        variant: 'filled',
-                        sx: {
-                            borderRadius: '4px',
-                            backgroundColor: 'white',
-                            '& ::-ms-reveal': { display: 'none',  },
-                            '& ::-ms-clear': { display: 'none', },
-                          },
-                        },
-                    }} />
-                    </LocalizationProvider>
+            <div className={globalStyles.CampBookingContainer}>
+                <form className={globalStyles.FormContainer} onSubmit={editBooking}> 
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker 
+                        label="BookingDate"
+                        value={bookingDate}
+                        onChange={(value)=>{handleBookingDateChange(value!)}}
+                        slotProps={{
+                            textField: {
+                            variant: 'filled',
+                            sx: {
+                                borderRadius: '4px',
+                                backgroundColor: 'white',
+                                '& ::-ms-reveal': { display: 'none',  },
+                                '& ::-ms-clear': { display: 'none', },
+                            },
+                            },
+                        }} />
+                        </LocalizationProvider>
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker 
-                    label="CheckoutDate"
-                    value={checkoutDate}
-                    onChange={(value)=>{handleCheckoutDateChange(value!)}}
-                    slotProps={{
-                        textField: {
-                        variant: 'filled',
-                        sx: {
-                            borderRadius: '4px',
-                            backgroundColor: 'white',
-                            '& ::-ms-reveal': { display: 'none',  },
-                            '& ::-ms-clear': { display: 'none', },
-                          },
-                        },
-                    }} />
-                    </LocalizationProvider>
-                <Button type="submit" variant="outlined" color='inherit' >
-                <p>Save</p> 
-                </Button> 
-            </form>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker 
+                        label="CheckoutDate"
+                        value={checkoutDate}
+                        onChange={(value)=>{handleCheckoutDateChange(value!)}}
+                        slotProps={{
+                            textField: {
+                            variant: 'filled',
+                            sx: {
+                                borderRadius: '4px',
+                                backgroundColor: 'white',
+                                '& ::-ms-reveal': { display: 'none',  },
+                                '& ::-ms-clear': { display: 'none', },
+                            },
+                            },
+                        }} />
+                        </LocalizationProvider>
+
+                    <Button type="submit" variant="outlined" color='inherit' >
+                    <p>Save</p> 
+                    </Button> 
+                </form>
+
+                <Image 
+                    className={globalStyles.ImageBorder}
+                    src={campPictureURL}
+                    width={1000} height={500} alt={campPictureURL} >
+                </Image>
+            </div>
         </div>
     )
 }

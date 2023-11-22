@@ -5,7 +5,7 @@ export default function EditBookingByCampgroundBookingPage ({params} : { params:
     <main>
       <div>
         {/* <p>Campground {params.cid}, Booking {params.bid}</p> */}
-        <EditBookingForm bid={params.bid}/>
+        <EditBookingForm bid={params.bid} cid={params.cid}/>        
       </div>
     </main> 
   )

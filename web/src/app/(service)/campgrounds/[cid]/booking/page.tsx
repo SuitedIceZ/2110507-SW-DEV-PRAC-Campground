@@ -1,14 +1,11 @@
-
+import CreateBookingForm from '@/components/CreateBookingForm'
 
 export default function BookingByCampgroundPage ({params} : { params: {cid:string}}) {
   return (
     <main>
       <div>
-        <p>Campground {params.cid}</p>
-        <div>
-          <p>Create new booking for Campground id {params.cid}</p>
-          <form></form>
-        </div>
+        {/* <p>Campground {params.cid}</p> */}
+          <CreateBookingForm  cid={params.cid}/>    
       </div>
     </main> 
   )
