@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Button from '@mui/material/Button';
+
 import styles from './ServiceLayout.module.css'; // Import the CSS module
+import NavigationBar from '../../components/NavigationBar'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,12 +18,11 @@ export default function ServiceLayout({
 }) {
   return (
       <body className={inter.className}>
-        <div className={styles.layoutBackground}> {/* Apply the background class */}
-            <div className='flex flex-row'>
-                <p>This is service layout</p>
-                <Button variant="outlined">Logout </Button>
+        <div className={styles.layoutBackground}> 
+            <div className={styles.contentWrapper}>
+                <NavigationBar/>
+                {children}
             </div>
-            {children}
         </div>
       </body>
   );

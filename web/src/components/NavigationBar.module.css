@@ -1,0 +1,21 @@
+
+.NavigationBar {
+    display: flex;
+    width: 100vw;
+    padding: 0px 110px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.NavigationBarSub {
+    display: flex;
+    align-items: flex-start;
+    gap: 72px;
+}
+
+.SmallRowContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+}
