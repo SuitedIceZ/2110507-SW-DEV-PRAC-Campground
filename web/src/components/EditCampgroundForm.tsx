@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function CreateCampgroundForm({cid}:{cid:string}) {
+export default function EditCampgroundForm({cid}:{cid:string}) {
     const router = useRouter();
 
     const [name, setName] = useState('')
@@ -43,7 +43,7 @@ export default function CreateCampgroundForm({cid}:{cid:string}) {
         }
         fetchCampgroundData();
     }, [])  
-    const addCampground = async (event: FormEvent) => {
+    const editCampground = async (event: FormEvent) => {
         event.preventDefault(); // Prevent the default form submission behavior
 
         try {
@@ -106,8 +106,8 @@ export default function CreateCampgroundForm({cid}:{cid:string}) {
 
     return(
         <div>
-            <p>Create new Campground</p>
-            <form className={globalStyles.FormContainer} onSubmit={addCampground}> 
+            <p>Edit Campground</p>
+            <form className={globalStyles.FormContainer} onSubmit={editCampground}> 
                 <TextField  label="Name"  autoComplete='off' name='name' id='name' value={name} onChange={handleNameChange}/>
                 <TextField  label="Address"  autoComplete='off' name='address' id="address" value={address} onChange={handleAddressChange}/>
                 <TextField  label="Distinct"  autoComplete='off' name='district' id="district" value={district} onChange={handleDistrictChange}/>
@@ -116,7 +116,7 @@ export default function CreateCampgroundForm({cid}:{cid:string}) {
                 <TextField  label="Tel (optional)"  autoComplete='off' name='tel' id="tel" value={tel} onChange={handleTelChange}/>
                 <TextField  label="picture URL"  autoComplete='off' name='picture' id="picture" value={picture} onChange={handlePictureChange}/>
                 <Button type="submit" variant="outlined" color='inherit' >
-                <p>Create</p> 
+                <p>Save</p> 
                 </Button> 
             </form>
         </div>
