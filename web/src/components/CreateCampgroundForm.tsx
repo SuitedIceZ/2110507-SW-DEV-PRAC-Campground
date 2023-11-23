@@ -60,8 +60,8 @@ export default function CreateCampgroundForm() {
     }
     return(
         <div>
-            <h3>Create new Campground</h3>
             <form className={globalStyles.FormContainer} onSubmit={addCampground}> 
+                <h5>Create new Campground</h5>
                 <TextField  label="Name" className="field" autoComplete='off' name='name' id='name'/>
                 <TextField  label="Address" className="field" autoComplete='off' name='address' id="address"/>
                 <TextField  label="Distinct" className="field" autoComplete='off' name='district' id="district"/>
