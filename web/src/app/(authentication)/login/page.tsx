@@ -5,6 +5,8 @@ import { Button } from "@mui/material";
 import useLoginForm from "./useLoginForm";
 import PasswordTextField from "@/components/PasswordTextField";
 import TextField from "@/components/TextField";
+import Link from '@mui/material/Link';
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   const {
@@ -14,6 +16,8 @@ export default function LoginPage() {
     handleEmailChange,
     handlePasswordChange,
   } = useLoginForm();
+
+  const router = useRouter();
 
     return (
       <div className={styles.pageContainer}>
@@ -30,6 +34,18 @@ export default function LoginPage() {
                 <div className="flex center">
                   <Button type='submit' variant="outlined" color='inherit'>Login</Button>
                 </div>
+                <p>Does not have an account? <Link
+                    component="button"
+                    variant="body2"
+                    color="inherit"
+                    onClick={(event) => {
+                        event.preventDefault()
+                        router.push("/register")
+                    }}
+                    >
+                    Register
+                    </Link>
+                  </p>
               </form>
           </div>
       </div>
