@@ -9,7 +9,7 @@ import { Divider, CircularProgress } from '@mui/material';
 import { useAuth } from '@/contexts/authContext/authContext';
 import { Suspense } from "react"
 import StyledImage from "./StyledImage"
-
+import AlertDialog from './AlertDialong';
 interface Campground {
     _id: string;
     name: string;
@@ -84,7 +84,8 @@ const CampgroundList: React.FC = () => {
         DeleteCampData();
     }
 
-    
+    const [isComfirmDeletePopupShow, setIsComfirmDeletePopupShow ] = useState<boolean>(false);
+    const [deletingCid, setDeletingCid] = useState<string>("")
 
     const CampgroundItem: React.FC<{ campground: Campground }> = ({ campground }) => {
         return (
@@ -116,7 +117,7 @@ const CampgroundList: React.FC = () => {
                                     <p>Edit</p> 
                                     </Button> 
                                     <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
-                                        onClick={()=>{DeleteCampground({cid: campground.id})}}>
+                                        onClick={()=>{setIsComfirmDeletePopupShow(true); setDeletingCid(campground.id);/*DeleteCampground({cid: campground.id})*/}}>
                                         <p>Delete</p> 
                                     </Button> 
                                 </> :
@@ -138,6 +139,13 @@ const CampgroundList: React.FC = () => {
             {campgroundList.map((campground) => (
               <CampgroundItem key={campground._id} campground={campground} />
             ))}
+            <AlertDialog 
+                open={isComfirmDeletePopupShow}
+                titleText='Comfirm deleting a campground'
+                confirmText='DELETE!'
+                handleClose={()=>{setIsComfirmDeletePopupShow(false)}}
+                handleComfirm={()=>{setIsComfirmDeletePopupShow(false); DeleteCampground({cid: deletingCid});}}
+            />
           </div>
         );
       };

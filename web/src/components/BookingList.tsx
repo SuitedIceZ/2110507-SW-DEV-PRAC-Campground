@@ -3,7 +3,7 @@ import React, { useEffect, useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Divider, Button } from '@mui/material';
 import { useAuth } from '@/contexts/authContext/authContext';
-
+import AlertDialog from './AlertDialong';
 interface Booking {
   _id: string;
   bookingDate: string;
@@ -33,6 +33,9 @@ const BookingList: React.FC = () => {
   const router = useRouter();
   const [bookingList, setBookingList] = useState<Booking[]>([]);
   const { role } = useAuth();
+
+  const [isComfirmDeletePopupShow, setIsComfirmDeletePopupShow ] = useState<boolean>(false);
+  const [deletingBid, setDeletingBid] = useState<string>("")
 
   useEffect(() => {
     const fetchBookingData = async () => {
@@ -73,7 +76,8 @@ const BookingList: React.FC = () => {
                 const data = await res.json();
                 if(data.success) {
                     console.log("delete success"); 
-                    window.location.reload();
+                    // window.location.reload();
+                    setBookingList(bookingList.filter(booking => booking._id !== bid));
                 }
             }
             catch (err) {
@@ -111,7 +115,8 @@ const BookingList: React.FC = () => {
                   </Button>
                   <Button type="submit" variant="outlined" color="inherit" style={{ width: '120px' }}
                     onClick={() => {
-                        DeleteBooking({bid: booking._id})
+                        setIsComfirmDeletePopupShow(true);
+                        setDeletingBid(booking._id);
                     }} >
                     <p>Delete</p>
                   </Button>
@@ -129,6 +134,13 @@ const BookingList: React.FC = () => {
         {bookingList.map((booking) => (
           <BookingItem key={booking._id} booking={booking} />
         ))}
+        <AlertDialog 
+            open={isComfirmDeletePopupShow}
+            titleText='Comfirm deleting a booking'
+            confirmText='DELETE!'
+            handleClose={()=>{setIsComfirmDeletePopupShow(false)}}
+            handleComfirm={()=>{setIsComfirmDeletePopupShow(false); DeleteBooking({bid: deletingBid});}}
+        />
       </div>
     );
   };
