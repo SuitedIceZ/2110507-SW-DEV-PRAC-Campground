@@ -5,9 +5,11 @@ import globalStyles from "../app/Global.module.css"
 import { revalidatePath } from "next/cache";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
 import { useRouter } from 'next/navigation'
+import { useSnackbar } from '@/contexts/snackbarContext';
 
 export default function EditCampgroundForm({cid}:{cid:string}) {
     const router = useRouter();
+    const { displaySnackbar } = useSnackbar();
 
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
@@ -73,6 +75,12 @@ export default function EditCampgroundForm({cid}:{cid:string}) {
 
         if (!data.success) {
             console.log(data.message);
+            if(postalcode.length > 5){
+                displaySnackbar("Postalcode cannot be more than 5 digits","error")
+            }
+            else{
+                displaySnackbar("Name already exist","error")
+            }
         } else {
             router.push('/campgrounds');
         }

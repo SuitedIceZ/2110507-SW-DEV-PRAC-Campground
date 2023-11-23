@@ -9,10 +9,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
 import Image from "next/image"
+import StyledImage from './StyledImage';
 import { useRouter } from 'next/navigation'
+import { useSnackbar } from '@/contexts/snackbarContext';
 
 export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
     const router = useRouter();
+    const { displaySnackbar } = useSnackbar();
 
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     const [checkoutDate, setCheckoutDate] = useState<Dayjs|null>(null)  
@@ -97,6 +100,7 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
 
         if (!data.success) {
             console.log(data.message);
+            displaySnackbar(data.message,'error')
         } else {
             router.push('/bookings');
         }
@@ -158,11 +162,12 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
                     </Button> 
                 </form>
 
-                <Image 
+                {/* <Image 
                     className={globalStyles.ImageBorder}
                     src={campPictureURL}
                     width={800} height={500} alt={campPictureURL}>
-                </Image>
+                </Image> */}
+                <StyledImage src={campPictureURL} alt={campPictureURL} width={"800px"} height={"500px"}/>
             </div>
         </div>
     )

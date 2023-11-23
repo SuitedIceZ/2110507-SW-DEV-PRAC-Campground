@@ -6,10 +6,12 @@ import globalStyles from "../app/Global.module.css"
 import { revalidatePath } from "next/cache";
 import { useRouter } from 'next/navigation'
 import { useAuth } from "@/contexts/authContext/authContext";
+import { useSnackbar } from '@/contexts/snackbarContext';
 
 export default function CreateCampgroundForm() {
     const router = useRouter();
     // const { name, token } = useAuth();
+    const { displaySnackbar } = useSnackbar();
 
     const addCampground = async (event: FormEvent) => {
         event.preventDefault(); // Prevent the default form submission behavior
@@ -51,6 +53,12 @@ export default function CreateCampgroundForm() {
 
         if (!data.success) {
             console.log(data.message);
+            if(data.message.message){
+                displaySnackbar(data.message.message,"error")
+            }
+            else{
+                displaySnackbar("Name already exist","error")
+            }
         } else {
             router.push('/campgrounds');
         }
