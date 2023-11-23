@@ -4,7 +4,7 @@ export default function ViewAllBookingListPage() {
   return (
     <main>
       <div>
-        <p>Booking All (for admin)</p>
+        <h3>All booking</h3>
         <BookingList></BookingList>
       </div>
     </main>
