@@ -6,7 +6,7 @@ import React, {createContext, useContext, useEffect, useState, FormEvent} from '
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
 import { Divider } from '@mui/material';
-
+import { useAuth } from '@/contexts/authContext';
 interface Campground {
     _id: string;
     name: string;
@@ -24,10 +24,12 @@ interface Campground {
     campgroundList: Campground[];
   }
 
-const AdminCampgroundList: React.FC = () => {
+const CampgroundList: React.FC = () => {
     const router = useRouter();
 
     const [campgroundList, setCampgroundList] = useState<Campground[]>([]);
+
+    const { role } = useAuth();
 
     useEffect(() => {
         const fetchCampgroundData = async () => {
@@ -101,17 +103,24 @@ const AdminCampgroundList: React.FC = () => {
                                 }}>
                                 <p>Booking</p> 
                             </Button> 
-                            <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
-                                onClick={(event:FormEvent)=>{
-                                    event.preventDefault();
-                                    router.push(`/campgrounds/${campground.id}/edit`)
-                                }}>
-                                <p>Edit</p> 
-                            </Button> 
-                            <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
-                                onClick={()=>{DeleteCampground({cid: campground.id})}}>
-                                <p>Delete</p> 
-                            </Button> 
+                            {
+                                role == 'admin' ? 
+                                <>
+                                    <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
+                                    onClick={(event:FormEvent)=>{
+                                        event.preventDefault();
+                                        router.push(`/campgrounds/${campground.id}/edit`)
+                                    }}>
+                                    <p>Edit</p> 
+                                    </Button> 
+                                    <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
+                                        onClick={()=>{DeleteCampground({cid: campground.id})}}>
+                                        <p>Delete</p> 
+                                    </Button> 
+                                </> :
+                                <></>
+                            }
+                            
                         </div>
                     </div>
                     <img src={campground.picture} alt={campground.name} style={{width:'300px', height:'150px'}}/>
@@ -132,4 +141,4 @@ const AdminCampgroundList: React.FC = () => {
       };
       return <CampgroundList campgroundList={campgroundList} />;
 }
-export default AdminCampgroundList;
+export default CampgroundList;
