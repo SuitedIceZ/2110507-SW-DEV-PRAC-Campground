@@ -19,6 +19,7 @@ export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [id, setId] = useState("");
   const [token, setToken] = useState(localStorage.getItem('token') || "");
 
   const router = useRouter();
@@ -43,6 +44,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setName(data.data.name);
             setRole(data.data.role);
             setToken(data.data.token);
+            setId(data.data._id)
+
         }
       }
       catch (err) {
@@ -68,12 +71,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setName("");
     setRole("");
     setToken("");
+    setId("");
     localStorage.removeItem('token');   
     router.push('/register')
   };
 
   return (
-    <AuthContext.Provider value={{name, setName, role, setRole, token, setToken, logout}}>
+    <AuthContext.Provider value={{name, setName, role, setRole, id, setId, token, setToken, logout}}>
       {children}
     </AuthContext.Provider>
   );

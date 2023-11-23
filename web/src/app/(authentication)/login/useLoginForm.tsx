@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/authContext";
 const useLoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { setName, setToken, setRole } = useAuth();
+  const { setName, setToken, setRole, setId } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +36,7 @@ const useLoginForm = () => {
         localStorage.setItem('token', data.token)
        setName(data.name)
        setToken(data.token)
+       setId(data._id)
        //setRole(data.data.role)
         router.push('/campgrounds')
       }

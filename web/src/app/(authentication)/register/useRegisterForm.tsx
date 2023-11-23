@@ -7,7 +7,7 @@ const useRegisterForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [tel, setTel] = useState('')
-  const { setName, setToken, setRole } = useAuth();
+  const { setName, setToken, setRole, setId} = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +42,7 @@ const useRegisterForm = () => {
        setName(data.name)
        setToken(data.token)
        setRole("user")
+       setId(data._id)
         router.push('/campgrounds')
       }
     } catch (error) {

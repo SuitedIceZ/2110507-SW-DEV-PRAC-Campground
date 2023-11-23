@@ -18,7 +18,7 @@ interface Campground {
     picture: string;
     __v: number;
     id: string;
-  }
+}
   
   interface CampgroundListProps {
     campgroundList: Campground[];
@@ -29,12 +29,11 @@ const CampgroundList: React.FC = () => {
 
     const [campgroundList, setCampgroundList] = useState<Campground[]>([]);
 
-    const { role } = useAuth();
+    const { role, id } = useAuth();
 
     useEffect(() => {
         const fetchCampgroundData = async () => {
             try {
-                //TODO : auth token
                 const token = localStorage.getItem('token')
                 console.log("token : ", token);
                 const res = await fetch(process.env['NEXT_PUBLIC_GATEWAY_URL'] + '/api/v1/campgrounds', {
@@ -72,7 +71,7 @@ const CampgroundList: React.FC = () => {
                 const data = await res.json();
                 if(data.success) {
                     console.log("delete success"); 
-                    window.location.reload();
+                    setCampgroundList(campgroundList.filter(campground => campground.id !== cid));
                 }
             }
             catch (err) {
