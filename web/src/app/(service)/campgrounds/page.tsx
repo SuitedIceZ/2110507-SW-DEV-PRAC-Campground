@@ -1,7 +1,7 @@
 'use client'
 import CampgroundList from '@/components/CampgroundList'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/contexts/authContext'
+import { useAuth } from '@/contexts/authContext/authContext'
 import { FormEvent } from 'react'
 import Button from '@mui/material/Button'
 

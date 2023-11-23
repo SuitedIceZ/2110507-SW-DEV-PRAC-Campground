@@ -5,7 +5,7 @@ import styles from './NavigationBar.module.css'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import globalStyles from '../app/Global.module.css'
-import { useAuth } from "@/contexts/authContext";
+import { useAuth } from "@/contexts/authContext/authContext";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -38,10 +38,7 @@ export default function NavigationBar() {
                 <NavigationBarItem title='Campground' pageRef='/campgrounds' isSelected={selectedPage==SelectingPage.Campground}/>
                 {
                     role == 'admin' ? 
-                    <>
-                    <NavigationBarItem title='My Booking' pageRef='/bookings' isSelected={selectedPage==SelectingPage.MyBooking}/>
-                    <NavigationBarItem title='All Booking' pageRef='/bookings/all' isSelected={selectedPage==SelectingPage.AllBooking}/>
-                    </> 
+                    <NavigationBarItem title='All Booking' pageRef='/bookings' isSelected={selectedPage==SelectingPage.AllBooking}/>
                     : 
                     <NavigationBarItem title='Booking' pageRef='/bookings' isSelected={selectedPage==SelectingPage.MyBooking}/>
                 }

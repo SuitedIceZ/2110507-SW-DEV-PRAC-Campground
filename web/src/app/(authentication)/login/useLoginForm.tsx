@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { useAuth } from "@/contexts/authContext";
+import { useAuth } from "@/contexts/authContext/authContext";
 
 const useLoginForm = () => {
   const [email, setEmail] = useState('')
@@ -37,6 +37,20 @@ const useLoginForm = () => {
        setName(data.name)
        setToken(data.token)
        setId(data._id)
+       const resMe = await fetch(process.env["NEXT_PUBLIC_GATEWAY_URL"] + '/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`,
+          },
+        })
+      const dataMe = await resMe.json();
+      if (!dataMe.success) {
+      }
+      else{
+        setRole(dataMe.data.role)
+
+      }
        //setRole(data.data.role)
         router.push('/campgrounds')
       }

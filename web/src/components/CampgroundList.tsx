@@ -6,7 +6,7 @@ import React, {createContext, useContext, useEffect, useState, FormEvent} from '
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
 import { Divider } from '@mui/material';
-import { useAuth } from '@/contexts/authContext';
+import { useAuth } from '@/contexts/authContext/authContext';
 interface Campground {
     _id: string;
     name: string;

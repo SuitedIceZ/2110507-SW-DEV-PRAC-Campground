@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import globalStyles from "../app/Global.module.css"
 import { revalidatePath } from "next/cache";
 import { useRouter } from 'next/navigation'
-import { useAuth } from "@/contexts/authContext";
+import { useAuth } from "@/contexts/authContext/authContext";
 
 export default function CreateCampgroundForm() {
     const router = useRouter();

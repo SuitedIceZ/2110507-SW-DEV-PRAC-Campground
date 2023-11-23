@@ -10,9 +10,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
+import { useSnackbar } from '@/contexts/snackbarContext';
 
 export default function CreateBookingForm({cid}:{cid:string}) {
     const router = useRouter();
+    const { displaySnackbar } = useSnackbar();
 
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     const [checkoutDate, setCheckoutDate] = useState<Dayjs|null>(null)  
@@ -22,7 +24,6 @@ export default function CreateBookingForm({cid}:{cid:string}) {
 
     const fetchCampgroundData = async () => {
         try {
-            //TODO : auth token
             const token = localStorage.getItem('token')
             console.log("token : ", token);
             const res = await fetch(process.env['NEXT_PUBLIC_GATEWAY_URL'] + '/api/v1/campgrounds/' + cid, {
@@ -66,11 +67,13 @@ export default function CreateBookingForm({cid}:{cid:string}) {
         const data = await res.json();
 
         if (!data.success) {
+            displaySnackbar(data.message,'error')
             console.log(data.message);
         } else {
             router.push('/campgrounds');
         }
         } catch (error) {
+            
             console.log(error);
         }
     }

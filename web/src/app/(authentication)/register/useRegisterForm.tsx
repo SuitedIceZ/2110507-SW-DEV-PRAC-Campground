@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import { useAuth } from "@/contexts/authContext";
+import { useAuth } from "@/contexts/authContext/authContext";
 
 const useRegisterForm = () => {
   const [name, setFormName] = useState('')
