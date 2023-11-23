@@ -94,7 +94,7 @@ const CampgroundList: React.FC = () => {
                             <p style={{color: '#B9C2D9'}}>District: {campground.district} | Province: {campground.province} | Postal Code: {campground.postalcode}</p>
                             <p style={{color: '#B9C2D9'}}>Tel: {campground.tel}</p>
                         </div>
-                        <div style={{display: 'flex',flexDirection:'row',justifyContent:'space-between', gap: '20px', width:'400px'}}>
+                        <div style={{display: 'flex',flexDirection:'row', gap: '20px'}}>
                             <Button type="submit" variant="outlined" color='inherit' style={{width:'120px'}} 
                                 onClick={(event:FormEvent)=>{
                                     event.preventDefault();
@@ -119,7 +119,6 @@ const CampgroundList: React.FC = () => {
                                 </> :
                                 <></>
                             }
-                            
                         </div>
                     </div>
                     <img src={campground.picture} alt={campground.name} style={{width:'300px', height:'150px'}}/>

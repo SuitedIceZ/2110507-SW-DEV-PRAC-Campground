@@ -17,6 +17,7 @@ export default function CreateBookingForm({cid}:{cid:string}) {
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     const [checkoutDate, setCheckoutDate] = useState<Dayjs|null>(null)  
 
+    const [campName, setCampName] = useState('') 
     const [campPictureURL, setCampPictureURL] = useState('') 
 
     const fetchCampgroundData = async () => {
@@ -35,6 +36,7 @@ export default function CreateBookingForm({cid}:{cid:string}) {
             if(data.success) {
                 console.log("camp data : ", data);
                 setCampPictureURL(data.data.picture)
+                setCampName(data.data.name)
             }
         }
         catch (err) {
@@ -81,9 +83,10 @@ export default function CreateBookingForm({cid}:{cid:string}) {
     }
     return(
         <div>
-            <h5>Create Booking</h5>
             <div className={globalStyles.CampBookingContainer}>
                 <form className={globalStyles.FormContainer} onSubmit={CreateBooking}> 
+                    <h5>{campName}</h5>
+                    <p style={{color: '#B9C2D9'}}>You can only book up to 3 nights.</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker 
                         label="BookingDate"

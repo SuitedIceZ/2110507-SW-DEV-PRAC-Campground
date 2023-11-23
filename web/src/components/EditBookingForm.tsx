@@ -17,6 +17,7 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
     const [bookingDate, setBookingDate] = useState<Dayjs|null>(null)
     const [checkoutDate, setCheckoutDate] = useState<Dayjs|null>(null)  
 
+    const [campName, setCampName] = useState('') 
     const [campPictureURL, setCampPictureURL] = useState('') 
 
     useEffect(() => {
@@ -63,6 +64,7 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
             if(data.success) {
                 console.log("camp data : ", data);
                 setCampPictureURL(data.data.picture)
+                setCampName(data.data.name)
             }
         }
         catch (err) {
@@ -111,9 +113,10 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
     }
     return(
         <div>
-            <p>Edit Booking</p>
             <div className={globalStyles.CampBookingContainer}>
                 <form className={globalStyles.FormContainer} onSubmit={editBooking}> 
+                    <h5>Edit {campName} booking</h5>
+                    <p style={{color: '#B9C2D9'}}>You can only book up to 3 nights.</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker 
                         label="BookingDate"
@@ -158,7 +161,7 @@ export default function EditBookingForm({bid,cid}:{bid:string,cid:string}) {
                 <Image 
                     className={globalStyles.ImageBorder}
                     src={campPictureURL}
-                    width={800} height={500} alt={campPictureURL} >
+                    width={800} height={500} alt={campPictureURL}>
                 </Image>
             </div>
         </div>
