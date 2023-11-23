@@ -2,9 +2,9 @@
 import CampgroundList from '@/components/CampgroundList'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/authContext/authContext'
-import { FormEvent } from 'react'
+import { FormEvent, Suspense } from 'react'
+import { CircularProgress } from '@mui/material';
 import Button from '@mui/material/Button'
-
 export default function ViewCampgroundListPage() {
   const router = useRouter();
   const { role } = useAuth();
@@ -26,7 +26,9 @@ export default function ViewCampgroundListPage() {
           }
           </div>
         <div>
-          <CampgroundList></CampgroundList>
+          <Suspense fallback={<p>now loading <CircularProgress/></p>}>
+            <CampgroundList></CampgroundList>
+          </Suspense>
         </div>
       </div>
     </main>

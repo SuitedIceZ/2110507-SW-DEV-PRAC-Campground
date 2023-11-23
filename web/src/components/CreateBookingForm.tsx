@@ -8,7 +8,7 @@ import dayjs from "dayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
-import Image from "next/image"
+import StyledImage from './StyledImage';
 import { useRouter } from 'next/navigation'
 import { useSnackbar } from '@/contexts/snackbarContext';
 
@@ -131,11 +131,12 @@ export default function CreateBookingForm({cid}:{cid:string}) {
                     </Button> 
                 </form>
 
-                <Image 
+                {/* <Image 
                     className={globalStyles.ImageBorder}
                     src={campPictureURL}
                     width={800} height={500} alt={campPictureURL} >
-                </Image>
+                </Image> */}
+                <StyledImage src={campPictureURL} alt={campPictureURL} width={"800px"} height={"500px"}/>
             </div>
         </div>
     )

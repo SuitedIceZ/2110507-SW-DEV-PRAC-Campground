@@ -5,8 +5,11 @@ import { revalidatePath } from "next/cache";
 import React, {createContext, useContext, useEffect, useState, FormEvent} from 'react'
 import Image from "next/image"
 import { useRouter } from 'next/navigation'
-import { Divider } from '@mui/material';
+import { Divider, CircularProgress } from '@mui/material';
 import { useAuth } from '@/contexts/authContext/authContext';
+import { Suspense } from "react"
+import StyledImage from "./StyledImage"
+
 interface Campground {
     _id: string;
     name: string;
@@ -121,7 +124,8 @@ const CampgroundList: React.FC = () => {
                             }
                         </div>
                     </div>
-                    <img src={campground.picture} alt={campground.name} style={{width:'300px', height:'150px'}}/>
+                        {/* <img src={campground.picture} alt={campground.name} style={{width:'300px', height:'150px'}}/> */}
+                        <StyledImage src={campground.picture} alt={campground.name}/>
                 </div>
                 <Divider sx={{ bgcolor: 'white' }}/>
             </div>
