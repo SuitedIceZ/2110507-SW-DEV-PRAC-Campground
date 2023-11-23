@@ -2,7 +2,7 @@
 import React, { useEffect, useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Divider, Button } from '@mui/material';
-import { useAuth } from '@/contexts/authContext';
+import { useAuth } from '@/contexts/authContext/authContext';
 
 interface Booking {
   _id: string;

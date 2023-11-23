@@ -1,9 +1,9 @@
 import styles from './AuthenticationLayout.module.css';
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Prompt } from 'next/font/google'
 import Button from '@mui/material/Button';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Prompt({weight: '400', subsets: ['thai']})
 
 export const metadata: Metadata = {
   title: 'Create Next App',

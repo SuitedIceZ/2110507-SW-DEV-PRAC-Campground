@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Prompt } from 'next/font/google';
 
 import styles from './ServiceLayout.module.css'; // Import the CSS module
 import NavigationBar from '../../components/NavigationBar'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Prompt({weight: '400', subsets: ['thai']})
 
 export const metadata: Metadata = {
   title: 'Create Next App',

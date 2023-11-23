@@ -17,7 +17,6 @@
 .header1Title {
     color: #FFF;
     text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-    font-family: Prompt;
     font-size: 96px;
     font-style: normal;
     font-weight: 400;
@@ -26,7 +25,6 @@
 
 .header2Title {
     color: #FFF;
-    font-family: Prompt;
     font-size: 64px;
     font-style: normal;
     font-weight: 400;
@@ -36,7 +34,6 @@
 .header3Title {
     color: #FFF;
     text-align: center;
-    font-family: Prompt;
     font-size: 32px;
     font-style: normal;
     font-weight: 400;

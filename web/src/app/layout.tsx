@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import Head from 'next/head';
+import { Prompt } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from "@/contexts/authContext/authContext";
 import { SnackbarProvider } from "@/contexts/snackbarContext";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Prompt({weight: '400', subsets: ['thai']})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
