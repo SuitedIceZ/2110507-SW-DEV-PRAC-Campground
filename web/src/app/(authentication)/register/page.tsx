@@ -42,7 +42,8 @@ export default function RegisterPage() {
                             component="button"
                             variant="body2"
                             color="inherit"
-                            onClick={() => {
+                            onClick={(event) => {
+                                event.preventDefault()
                                 router.push("/login")
                             }}
                             >
