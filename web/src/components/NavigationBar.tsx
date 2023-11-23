@@ -48,9 +48,9 @@ export default function NavigationBar() {
             </div>
 
              <div className={styles.NavigationBarSub}>
-                <div className={globalStyles.RowContainer}>   
+                <div className={globalStyles.RowContainer} style={{marginTop:'6px'}}>   
                     <PermIdentityIcon/>
-                    <p>{name} {role=='admin'?" (Admin)" : ""}</p>
+                    <p >{name} {role=='admin'?" (Admin)" : ""}</p>
                 </div>
                 <Button variant="outlined" color='inherit' onClick={logout}>
                     <div className={styles.SmallRowContainer}> 
