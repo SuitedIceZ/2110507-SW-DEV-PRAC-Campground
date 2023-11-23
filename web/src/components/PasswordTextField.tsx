@@ -63,7 +63,7 @@ const PasswordTextField: FC<TextFieldProps> = (props) => {
                 edge="end"
                 style={{ color: "#616161" }}
               >
-                {!showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
               </IconButton>
             </InputAdornment>
           ),

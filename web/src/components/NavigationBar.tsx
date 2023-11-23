@@ -6,25 +6,45 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import LogoutIcon from '@mui/icons-material/Logout';
 import globalStyles from '../app/Global.module.css'
 import { useAuth } from "@/contexts/authContext";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+enum SelectingPage {
+    Campground,
+    MyBooking,
+    AllBooking,
+}
+
+
 
 export default function NavigationBar() {
-    // TODO : add authorization
     const { name, role, logout } = useAuth()
+    const [selectedPage, setSelectedPage] = useState<SelectingPage>(SelectingPage.Campground)
+    const router = useRouter()
 
+    useEffect(()=>{
+        const pathList = window.location.pathname.split('/').reverse();
+        if(pathList[0] == 'bookings'){
+            setSelectedPage(SelectingPage.MyBooking)
+        }
+        else if(pathList[0] == 'all'){
+            setSelectedPage(SelectingPage.AllBooking)
+        }
+        
+    },[])
     return (
         <div className={styles.NavigationBar}>
             <div className={styles.NavigationBarSub}>
-                <NavigationBarItem title='Campground' pageRef='/campgrounds'/>
+                <NavigationBarItem title='Campground' pageRef='/campgrounds' isSelected={selectedPage==SelectingPage.Campground}/>
                 {
                     role == 'admin' ? 
                     <>
-                    <NavigationBarItem title='My Booking' pageRef='/bookings'/>
-                    <NavigationBarItem title='All Booking' pageRef='/bookings/all'/>
+                    <NavigationBarItem title='My Booking' pageRef='/bookings' isSelected={selectedPage==SelectingPage.MyBooking}/>
+                    <NavigationBarItem title='All Booking' pageRef='/bookings/all' isSelected={selectedPage==SelectingPage.AllBooking}/>
                     </> 
                     : 
-                    <NavigationBarItem title='Booking' pageRef='/bookings'/>
+                    <NavigationBarItem title='Booking' pageRef='/bookings' isSelected={selectedPage==SelectingPage.MyBooking}/>
                 }
-                {/* <NavigationBarItem title='Booking' pageRef='/bookings'/> */}
             </div>
 
              <div className={styles.NavigationBarSub}>
